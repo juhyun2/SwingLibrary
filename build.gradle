@@ -1,0 +1,30 @@
+apply plugin: 'java-library'
+
+sourceCompatibility= 1.8 //컴파일할 때 적용할 java code의 jdkversion 지정
+
+//소스 인코딩지정
+tasks.withType(JavaCompile) {
+   options.encoding= 'UTF-8'
+}
+
+// 문서화 File encoding
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+ 	// http://mvnrepository.com 에서 검색
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
