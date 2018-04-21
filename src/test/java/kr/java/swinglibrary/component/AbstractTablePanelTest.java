@@ -3,6 +3,7 @@ package kr.java.swinglibrary.component;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.SwingConstants;
 import javax.swing.table.TableModel;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,17 +16,50 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+@SuppressWarnings("serial")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AbstractTablePanelTest {
 	private static List<Product> productLists;
-	private static ProductTablePanel panel;
+	private static AbstractTablePanel panel;
+	
+	static class Product implements ToArray {
+
+		private String code;
+		private String name;
+		private int price;
+		
+		public Product(String code, String name, int price) {
+			this.code = code;
+			this.name = name;
+			this.price = price;
+		}
+
+		@Override
+		public Object[] toArray() {
+			return new Object[] {code, name, String.format("%,d", price)};
+		}
+
+	}
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		productLists = Arrays.asList(
 				new Product("A001", "Test1", 1000), 
 				new Product("A002", "Test2", 15000));
-		panel= new ProductTablePanel();
+		
+		panel= new AbstractTablePanel("Test") {
+			@Override
+			protected void setAlignWith() {
+				tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
+				tableSetWidth(100, 200, 100);	
+			}
+
+			@Override
+			public void setColumnNames() {
+				colNames = new String[] { "제품번호", "제품명", "제품 단가" };			
+			}
+		};
+		
 		panel.loadData(productLists);
 	}
 

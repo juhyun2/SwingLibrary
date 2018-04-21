@@ -22,6 +22,7 @@ public abstract class AbstractTablePanel extends JPanel {
 	
 	public AbstractTablePanel(String title) {
 		initComponents(title);
+		setColumnNames();
 	}
 
 	private void initComponents(String title) {
@@ -65,17 +66,17 @@ public abstract class AbstractTablePanel extends JPanel {
 		return table.getValueAt(table.getSelectedRow(), 0);
 	}
 
-	public void addRow(ToArray product) {
-		model.addRow(product.toArray());
+	public void addRow(ToArray item) {
+		model.addRow(item.toArray());
 	}
 
 	public void removeRow() {
 		model.removeRow(table.getSelectedRow());
 	}
 
-	public void updateRow(ToArray product) {
+	public void updateRow(ToArray item) {
 		int row = table.getSelectedRow();
-		Object[] data = product.toArray();
+		Object[] data = item.toArray();
 		int colSize = model.getColumnCount();
 		
 		for(int column = 0; column < colSize; column++) {
@@ -83,6 +84,8 @@ public abstract class AbstractTablePanel extends JPanel {
 		}
 	}
 
+	public abstract void setColumnNames();
+	
 	public void loadData(List<? extends ToArray> items) {
 		Object[][] datas = toArray(items);
 		model = new NonEditableModel(datas, colNames);
