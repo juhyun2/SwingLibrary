@@ -21,7 +21,7 @@ public class InputTextFieldTest {
 
 	@Test
 	public void testInputTextField() {
-		ic.setTfVaue("테스트");
+		ic.setTfValue("테스트");
 
 		String res = ic.getTfValue();
 		Assert.assertEquals("테스트", res);
@@ -39,7 +39,7 @@ public class InputTextFieldTest {
 
 	@Test
 	public void testInputTextFieldEmpty() {
-		ic.setTfVaue("aa");
+		ic.setTfValue("aa");
 
 		try {
 			ic.isEmptyCheck();
@@ -53,9 +53,9 @@ public class InputTextFieldTest {
 	@Test
 	public void testInputTextFieldIsValidCheck() {
 		try {
-			ic.setTfVaue("A000");
+			ic.setTfValue("A000");
 			ic.isValidCheck("[A-Z][0-9]{3}", "첫글자는 A-Z 숫자 3자리만 가능");
-			ic.setTfVaue("000");
+			ic.setTfValue("000");
 			ic.isValidCheck("[0-9]{3,8}", "정수 3자리 이상 ~ 8자리만 가능");
 			LogManager.getLogger().debug("isValidCheck() - Valid");
 		} catch (Exception e) {

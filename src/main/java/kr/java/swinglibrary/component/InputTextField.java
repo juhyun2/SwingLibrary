@@ -25,7 +25,7 @@ public class InputTextField extends JPanel {
 		tf.setColumns(10);
 	}
 
-	public void setTfVaue(String value){
+	public void setTfValue(String value){
 		tf.setText(value.trim());
 	}
 	
